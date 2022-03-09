@@ -41,6 +41,7 @@
     ]
   },
   "devDependencies": {
-    "@types/moment": "^2.13.0"
+    "@types/moment": "^2.13.0",
+    "react-error-overlay": "^6.0.9"
   }
 }
