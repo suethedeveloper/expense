@@ -81,7 +81,6 @@ function ExpenseItem(props: {date: Date, title: string, amount: number}) {
 //#40
 import Card from "./Card";
 function ExpenseItem(props: {date: Date, title: string, amount: number}) {
-  console.log("TEST")
   return (
     <Card className="expense-item">
       <ExpenseDate date={props.date} />
