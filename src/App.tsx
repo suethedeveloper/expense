@@ -1,4 +1,5 @@
 import ExpenseItem from './components/Expenses//ExpenseItem';
+import NewExpense from "./components/NewExpense/NewExpense";
 
 interface Expense {
   id: string; 
@@ -30,7 +31,7 @@ function App() {
   ]
   return (
     <div>
-      <h2>Let's get started!</h2>
+      <div><NewExpense></NewExpense></div>    
       {
         expenses.map((expense: Expense, index: number) => (
           <ExpenseItem 
