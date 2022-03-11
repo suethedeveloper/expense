@@ -9,7 +9,7 @@ interface Expense {
 }
 
 function App() {
-  const expenses = [
+  let expenses = [
     {
       id: 'e1',
       title: "Toilet Papaer",
@@ -29,9 +29,16 @@ function App() {
       date: new Date(2021, 2, 28)
     }
   ]
+
+  const adExpenseHandler = (expense: Expense) => {
+    console.log("APP", expense)
+    expenses.push(expense);
+    console.log("--APP", expenses)
+  }
+
   return (
     <div>
-      <div><NewExpense></NewExpense></div>    
+      <NewExpense onAddExpense={adExpenseHandler}></NewExpense>
       {
         expenses.map((expense: Expense, index: number) => (
           <ExpenseItem 
