@@ -1,7 +1,7 @@
-import ExpenseItem from './components/Expenses//ExpenseItem';
 import NewExpense from "./components/NewExpense/NewExpense";
+import Expenses from './components/Expenses/Expenses';
 
-interface Expense {
+export interface Expense {
   id: string; 
   title: string; 
   amount: number; 
@@ -39,16 +39,7 @@ function App() {
   return (
     <div>
       <NewExpense onAddExpense={adExpenseHandler}></NewExpense>
-      {
-        expenses.map((expense: Expense, index: number) => (
-          <ExpenseItem 
-            key={index}
-            title={expense.title}
-            amount={expense.amount}
-            date={expense.date}
-          ></ExpenseItem>
-        ))
-      }
+      <Expenses items={expenses} />
     </div>
   ); 
 }

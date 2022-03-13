@@ -1,4 +1,3 @@
-//#39
 import "./ExpenseDate.css";
 
 function expenseDate(props: {date: Date}) {

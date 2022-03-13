@@ -1,9 +1,18 @@
 import ExpenseForm from './ExpenseForm';
 import './NewExpense.css';
 
-const NewExpense = (props: any) => {
-  const onSaveExpenseDataHandler = (data: {}) => {
-    const expenseData = { 
+interface Expense {
+  id: string; 
+  title: string; 
+  amount: number; 
+  date: Date;
+}
+
+interface NewExpenseProps { onAddExpense: (data: Expense) => void; }
+
+const NewExpense = (props: NewExpenseProps) => {
+  const onSaveExpenseDataHandler = (data: {amount: number; date:Date; title: string;}) => {
+    const expenseData: Expense = { 
       ...data, 
       id: Math.random().toString()
     };
