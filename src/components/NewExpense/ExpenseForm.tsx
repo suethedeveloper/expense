@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import './ExpenseForm.css';
 
-const ExpenseForm = (props: any) => {
+interface onSaveExpenseDataFunc {
+  onSaveExpenseData: (data: {
+      title: string;
+      amount: number;
+      date: Date;
+  }) => void;
+}
+const ExpenseForm = (props: onSaveExpenseDataFunc) => {
   const [title, setTitle] = useState<string>("");
-  const [amount, setAmount] = useState<string>("");
+  const [amount, setAmount] = useState<number>(0);
   const [enteredDate, setDate] = useState<string>("");
     // const [userInput, setUserInput] = useState<object>({
     //     title: "",
@@ -22,7 +29,7 @@ const ExpenseForm = (props: any) => {
           // setUserInput((prevState: {}) => {
         //   return {...prevState, title: evt.target.value}
         // });
-        setAmount(evt.target.value);
+        setAmount(Number(evt.target.value));
     }
     
     const dataChangeHandler = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +48,7 @@ const ExpenseForm = (props: any) => {
       }
       props.onSaveExpenseData(expenseData);
       setTitle("");
-      setAmount("");
+      setAmount(0);
       setDate("");
     }
     

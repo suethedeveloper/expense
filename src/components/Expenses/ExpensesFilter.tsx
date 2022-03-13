@@ -2,7 +2,10 @@ import React from 'react';
 
 import './ExpensesFilter.css';
 
-const ExpensesFilter = (props: any) => {
+const ExpensesFilter = (props: {
+  selected: string;
+  onChangeFilter: (data: string) => void;
+}) => {
   const dropdownChangeHandler = (event: React.ChangeEvent) => {
     const target = event.target as HTMLTextAreaElement;
     props.onChangeFilter(target.value);

@@ -7,6 +7,11 @@ export interface Expense {
   amount: number; 
   date: Date;
 }
+// export interface Expense2 {
+//     title: string;
+//     amount: string;
+//     date: Date;
+// }
 
 function App() {
   let expenses = [
