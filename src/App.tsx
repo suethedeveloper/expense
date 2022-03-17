@@ -2,17 +2,14 @@ import { useState } from "react";
 import NewExpense from "./components/NewExpense/NewExpense";
 import Expenses from './components/Expenses/Expenses';
 
-export interface Expense {
-  id: string; 
-  title: string; 
-  amount: number; 
-  date: Date;
-}
-// export interface Expense2 {
-//     title: string;
-//     amount: string;
-//     date: Date;
+// export interface Expense {
+//   id: string; 
+//   title: string; 
+//   amount: number; 
+//   date: Date;
 // }
+import { ExpenseType } from "./interface";
+
 const DUMMY_EXPENSES = [
   {
     id: 'e1',
@@ -38,11 +35,8 @@ function App() {
   // let expenses = 
   const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
 
-  const addExpenseHandler = (expense: Expense) => {
-    console.log("NEW", expenses)
-    setExpenses((prevExpenses) => {
-      console.log("BBB", prevExpenses)
-      console.log("AFTER", [expense, ...prevExpenses])
+  const addExpenseHandler = (expense: ExpenseType) => {
+    setExpenses((prevExpenses: any) => {
       return [expense, ...prevExpenses]
     });
   }

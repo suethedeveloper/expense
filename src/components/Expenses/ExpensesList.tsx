@@ -1,5 +1,6 @@
 import ExpenseItem from './ExpenseItem';
 import './ExpensesList.css';
+import { ExpenseType } from '../../interface';
 
 const ExpensesList = (props: any) => {
   if (props.items.length === 0) {
@@ -8,7 +9,7 @@ const ExpensesList = (props: any) => {
 
   return (
     <ul className='expenses-list'>
-      {props.items.map((expense: any) => (
+      {props.items.map((expense: ExpenseType) => (
         <ExpenseItem
           key={expense.id}
           title={expense.title}

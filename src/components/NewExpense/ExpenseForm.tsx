@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import './ExpenseForm.css';
 
-// interface onSaveExpenseDataFunc {
-//   onCancel: (data: boolean) => void;
-//   onSaveExpenseData: (data: {
-//       title: string;
-//       amount: number;
-//       date: Date;
-//   }) => void;
-// }
+interface onSaveExpenseDataFunc {
+  onCancel: () => void;
+  onSaveExpenseData: (data: {
+      title: string;
+      amount: number;
+      date: Date;
+  }) => void;
+}
 
 
 // const ExpenseForm = (props: onSaveExpenseDataFunc) => {
-const ExpenseForm = (props: any) => {
+const ExpenseForm = (props: onSaveExpenseDataFunc) => {
   const [title, setTitle] = useState<string>("");
   const [amount, setAmount] = useState<number>(0);
   const [enteredDate, setDate] = useState<string>("");

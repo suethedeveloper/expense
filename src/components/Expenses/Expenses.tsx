@@ -3,6 +3,7 @@ import Card from "../UI/Card";
 import ExpensesFilter from "./ExpensesFilter";
 import ExpesnesList from "./ExpensesList";
 import "./Expenses.css";
+import ExpensesChart from "./ExpensesChart";
 // import Expense2 from "../../App";
 
 interface Expense2 {
@@ -23,6 +24,7 @@ const Expenses = (props: {items: Expense2[]}) => {
         <div>
             <Card className="expenses">
             <ExpensesFilter selected={filteredYear} onChangeFilter={filterChangeHandler}></ExpensesFilter>
+            <ExpensesChart expenses={filteredExpenses} />
             <ExpesnesList items={filteredExpenses}></ExpesnesList>
             </Card>
         </div>
