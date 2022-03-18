@@ -10,7 +10,7 @@ import Expenses from './components/Expenses/Expenses';
 // }
 import { ExpenseType } from "./interface";
 
-const DUMMY_EXPENSES = [
+const DUMMY_EXPENSES: ExpenseType[]  = [
   {
     id: 'e1',
     title: "Toilet Papaer",
@@ -33,10 +33,10 @@ const DUMMY_EXPENSES = [
 
 function App() {
   // let expenses = 
-  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+  const [expenses, setExpenses] = useState<ExpenseType[]>(DUMMY_EXPENSES);
 
   const addExpenseHandler = (expense: ExpenseType) => {
-    setExpenses((prevExpenses: any) => {
+    setExpenses((prevExpenses) => {
       return [expense, ...prevExpenses]
     });
   }

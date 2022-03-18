@@ -2,7 +2,8 @@ import ChartBar from './ChartBar';
 import './Chart.css';
 import {ChartType} from "../../interface";
 
-const Chart = (props: any) => {
+const Chart = (props: {dataPoints: ChartType[]}
+  ) => {
   const dataPointValues = props.dataPoints.map( (dataPoint: ChartType) => dataPoint.value);
   const totalMaximum = Math.max(...dataPointValues);
 

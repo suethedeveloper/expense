@@ -1,8 +1,9 @@
 export interface ChartType {
     label: string;
-    maxValue: number;
     value: number;
+    maxValue?: number;
 }
+
 
 export interface ExpenseType {
     id?: string; 

@@ -4,15 +4,15 @@ import ExpensesFilter from "./ExpensesFilter";
 import ExpesnesList from "./ExpensesList";
 import "./Expenses.css";
 import ExpensesChart from "./ExpensesChart";
-// import Expense2 from "../../App";
+import { ExpenseType } from "../../interface";
 
-interface Expense2 {
-    title: string;
-    amount: number;
-    date: Date;
-    id: string
-}
-const Expenses = (props: {items: Expense2[]}) => {
+// interface Expense2 {
+//     title: string;
+//     amount: number;
+//     date: Date;
+//     id: string
+// }
+const Expenses = (props: {items: ExpenseType[]}) => {
     const [filteredYear, setFilteredYear] = useState('2020');
     const filterChangeHandler = (selectedYear: string) => {
         setFilteredYear(selectedYear);

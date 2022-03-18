@@ -1,6 +1,7 @@
 import Chart from '../Chart/Chart';
+import { ExpenseType } from '../../interface';
 
-const ExpensesChart = (props: any) => {
+const ExpensesChart = (props: {expenses: ExpenseType[]}) => {
   const chartDataPoints: {
     label: string; value: number
   }[] = [

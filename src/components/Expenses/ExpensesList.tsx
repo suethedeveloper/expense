@@ -2,7 +2,7 @@ import ExpenseItem from './ExpenseItem';
 import './ExpensesList.css';
 import { ExpenseType } from '../../interface';
 
-const ExpensesList = (props: any) => {
+const ExpensesList = (props: {items: ExpenseType[]}) => {
   if (props.items.length === 0) {
     return <h2 className='expenses-list__fallback'>Found no expenses.</h2>;
   }
