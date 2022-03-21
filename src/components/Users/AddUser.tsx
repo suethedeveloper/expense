@@ -3,9 +3,8 @@ import React, { useState } from 'react';
 import Card from '../UI/Card';
 import Button from '../UI/Button';
 import classes from './AddUser.module.css';
-import { User } from '../../type';
- //@ts-ignore
-const AddUser = (props: {onAddUser: (args: User) => void}) => {
+
+const AddUser = (props: {onAddUser: (username: string, age: number) => void}) => {
     const [enteredUsername, setEnteredUsername] = useState("");
     const [enteredAge, setEnteredAge] = useState("");
 
@@ -20,6 +19,7 @@ const AddUser = (props: {onAddUser: (args: User) => void}) => {
     if (+enteredAge < 1) {
       return;
     }
+    props.onAddUser(enteredUsername, +enteredAge);
     setEnteredUsername('');
     setEnteredAge('');
   };

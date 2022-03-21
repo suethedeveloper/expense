@@ -2,22 +2,22 @@
 import { useState } from 'react';
 
 import AddUser from './components/Users/AddUser';
-import { User } from './type';
+import UsersList from './components/Users/UsersList';
+// import { User } from './type';
 
 function App() {
-  //@ts-ignore
-  const [usersList, setUsersList] = useState<Array>([]);
-
-  const addUserHandler = (props: User) => {
+  const [usersList, setUsersList] = useState<any>([]);
+  const addUserHandler = (username: string, age: number) => {
     setUsersList((prevUsersList: {}[]) => [
         ...prevUsersList,
-        { username: props.username, age: props.age, id: Math.random().toString() },
+        { username, age, id: Math.random().toString() },
       ]);
   }
 
   return (
     <div>
       <AddUser onAddUser={addUserHandler} />
+      { usersList.length && <UsersList users={usersList} />}
     </div>
   ); 
 }
