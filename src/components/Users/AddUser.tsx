@@ -9,16 +9,25 @@ import classes from './AddUser.module.css';
 const AddUser = (props: {onAddUser: (username: string, age: number) => void}) => {
     const [enteredUsername, setEnteredUsername] = useState("");
     const [enteredAge, setEnteredAge] = useState("");
+    const [error, setError] = useState<{title:string; message:string} | null>();
 
   const addUserHandler = (event: React.FormEvent) => {
     event.preventDefault();
     //Form validation
     if (!enteredUsername || !enteredAge) {
+      setError({
+        title: "Invalid input",
+        message: "Please enter a valid name & age"
+      })
       return;
     }
     //enteredAge: string. 
     //+enteredAge: number => + will convert string to number
     if (+enteredAge < 1) {
+      setError({
+        title: "Invalid age",
+        message: "Please enter a valid age (>0)"
+      }) 
       return;
     }
     props.onAddUser(enteredUsername, +enteredAge);
@@ -34,9 +43,19 @@ const AddUser = (props: {onAddUser: (username: string, age: number) => void}) =>
     setEnteredAge(event.target.value);
   };
 
+  const errorHandler = () => {
+    setError(null);
+  }
+
   return (
     <div>
-      <ErrorModal title='An error occured!' message='Error message'/>
+      { error && 
+        <ErrorModal 
+          title={error.title} 
+          message={error.message} 
+          onConfirm={errorHandler} 
+        /> 
+      }
       <Card className={classes.input}>
         <form onSubmit={addUserHandler}>
           <label htmlFor="username">Username</label>
