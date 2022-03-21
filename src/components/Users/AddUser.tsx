@@ -11,7 +11,17 @@ const AddUser = (props: {onAddUser: (args: User) => void}) => {
 
   const addUserHandler = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(enteredUsername, enteredAge)
+    //Form validation
+    if (!enteredUsername || !enteredAge) {
+      return;
+    }
+    //enteredAge: string. 
+    //+enteredAge: number => + will convert string to number
+    if (+enteredAge < 1) {
+      return;
+    }
+    setEnteredUsername('');
+    setEnteredAge('');
   };
 
   const usernameChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
