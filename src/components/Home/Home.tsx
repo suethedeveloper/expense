@@ -1,10 +1,12 @@
+import Button from '../UI/Button/Button';
 import Card from '../UI/Card/Card';
 import classes from './Home.module.css';
-//@ts-ignore
-const Home = (props: any) => {
+
+const Home = (props: {onLogout: () => void}) => {
   return (
     <Card className={classes.home}>
       <h1>Welcome back!</h1>
+      <Button onClick={props.onLogout}>Log Out</Button>
     </Card>
   );
 };

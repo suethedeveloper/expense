@@ -4,10 +4,10 @@ import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
 
-type State = {
-  value: string;
-  isValid: boolean;
-}
+// type State = {
+//   value: string;
+//   isValid: boolean;
+// }
 // type Action = 
 
 const emailReducer = (state: any, action: {
