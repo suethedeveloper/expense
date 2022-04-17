@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Modal from "../UI/Modal";
 import classes from "./Cart.module.css";
-import CartContext, { Item } from "../../store/card-context";
+import CartContext, { Item } from "../../store/cart-context";
 import CartItem from "./CartItem";
 
 const Cart = (props: {onClose: () => void}) => {
@@ -24,8 +24,8 @@ const Cart = (props: {onClose: () => void}) => {
                     name={item.name}
                     amount={item.amount}
                     price={item.price}
-                    onRemove={cartItemRemoveHandler.bind(null, item.id)}
-                    onAdd={cartItemAddHandler.bind(null, item)}
+                    onRemove={cartItemRemoveHandler.bind(this, item.id)}
+                    onAdd={cartItemAddHandler.bind(this, item)}
                 />
             ))}
         </ul>
@@ -33,7 +33,7 @@ const Cart = (props: {onClose: () => void}) => {
     return (
         <Modal onClose={props.onClose}>
             {cartItems}
-            <div>
+            <div className={classes['total']}>
                 <span>Total Amount</span>
                 <span>{totalAmount}</span>
             </div>
