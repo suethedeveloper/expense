@@ -11,9 +11,9 @@ interface InputProps {
 }
 
 type Props = {input: InputProps ; label: string };
-// export type Ref = HTMLInputElement;
+type Ref = HTMLInputElement;
 
-const Input = React.forwardRef<HTMLInputElement, Props>((props, ref) => {
+const Input = React.forwardRef<Ref, Props>((props, ref) => {
     return <div className={classes.input}>
         <label htmlFor={props.input.id}>{props.label}</label>
         <input ref={ref} {...props.input} />
