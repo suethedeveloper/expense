@@ -1,3 +1,4 @@
+import React from 'react';
 import { ReactChild } from 'react';
 import classes from './Button.module.css';
 
@@ -22,5 +23,5 @@ const Button = (props: {
     </button>
   );
 };
-
-export default Button;
+//props.onClick === props.prvious.onClick (false)
+export default React.memo(Button);

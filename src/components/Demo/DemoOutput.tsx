@@ -1,5 +1,5 @@
-import React from "react";
-import MyParagraph from "./MyParagraph";
+import React from 'react';
+import MyParagraph from './MyParagraph';
 
 const DemoOutput = (props: {show: boolean}) => {
   console.log('DemoOutput RUNNING');
