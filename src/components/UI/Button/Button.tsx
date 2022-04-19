@@ -8,6 +8,9 @@ const Button = (props: {
   children: ReactChild,
   className?: string
 }) => {
+
+  console.log('BUTTON RUNNING');
+
   return (
     <button
       type={props.type || 'button'}

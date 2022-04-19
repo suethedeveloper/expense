@@ -1,21 +1,24 @@
-import './App.css';
-import {useState} from "react";
+import { useState } from 'react';
+
 import Button from './components/UI/Button/Button';
+import DemoOutput from './components/Demo/DemoOutput';
+import './App.css';
 
 function App() {
-  const [showPrargraph, setShowPrargraph] = useState(false);
+  //@ts-ignore
+  const [showParagraph, setShowParagraph] = useState(false);
 
-  console.log("App running")
-  
+  console.log('APP RUNNING');
+
   const toggleParagraphHandler = () => {
-    setShowPrargraph(prevShowPrargraph => !prevShowPrargraph)
-  }
-
+    setShowParagraph((prevShowParagraph) => !prevShowParagraph);
+  };
+ 
   return (
     <div className="app">
       <h1>Hi there!</h1>
-      {showPrargraph && <p>This is new!</p>}
-      <Button onClick={toggleParagraphHandler}>Toggle Prargraph</Button>
+      <DemoOutput show={false} />
+      <Button onClick={toggleParagraphHandler}>Toggle Paragraph!</Button>
     </div>
   );
 }
