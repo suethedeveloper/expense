@@ -10,10 +10,8 @@ function App() {
 
   console.log('APP RUNNING');
 
-  const toggleParagraphHandler = useCallback(() => { //whenever renders it becomes to a new function! that
-    //why button component keep renders even with react.memo(Button)
-    //false === false | "test" === "test" (primartive type comparison - true)
-    //[1,2,3] === [1.2.3] (false)
+  const toggleParagraphHandler = useCallback(() => {
+    //will save the function somewhere and reuse same function object
     setShowParagraph((prevShowParagraph) => !prevShowParagraph);
   }, []);
  
