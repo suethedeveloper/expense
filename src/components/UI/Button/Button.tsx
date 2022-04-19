@@ -2,11 +2,11 @@ import { ReactChild } from 'react';
 import classes from './Button.module.css';
 
 const Button = (props: {
-  type: "button" | "submit" | "reset" | undefined;
-  onClick: () => void;
-  disabled: boolean;
+  type?: "button" | "submit" | "reset" | undefined;
+  onClick?: () => void;
+  disabled?: boolean;
   children: ReactChild,
-  className: string
+  className?: string
 }) => {
   return (
     <button
