@@ -2,9 +2,9 @@ import Movie from './Movie';
 import classes from './MoviesList.module.css';
 
 interface Movie {
-  id:string;
-  title:string;
-  releaseDate: Date;
+  id?: number;
+  title: string;
+  releaseDate: string;
   openingText: string;
 }
 
