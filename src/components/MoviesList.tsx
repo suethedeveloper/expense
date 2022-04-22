@@ -1,17 +1,11 @@
 import Movie from './Movie';
 import classes from './MoviesList.module.css';
+import { MovieType } from '../types/MovieType';
 
-interface Movie {
-  id?: number;
-  title: string;
-  releaseDate: string;
-  openingText: string;
-}
-
-const MovieList = (props: {movies: Movie[]}) => {
+const MovieList = (props: {movies: MovieType[]}) => {
   return (
     <ul className={classes['movies-list']}>
-      {props.movies.map((movie: Movie) => (
+      {props.movies.map((movie: MovieType) => (
         <Movie
           key={movie.id}
           title={movie.title}
