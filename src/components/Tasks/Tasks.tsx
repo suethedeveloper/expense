@@ -2,6 +2,7 @@ import Section from '../UI/Section';
 import TaskItem from './TaskItem';
 import classes from './Tasks.module.css';
 import Task from '../../types/Task';
+import { ReactNode } from 'react';
 
 const Tasks = (props: {
   items: Task[];
@@ -21,7 +22,7 @@ const Tasks = (props: {
     );
   }
 
-  let content: any = taskList;
+  let content: string | ReactNode = taskList;
 
   if (props.error) {
     content = <button onClick={props.onFetch}>Try again</button>;
