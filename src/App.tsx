@@ -13,8 +13,8 @@ function App() {
     setIsLoading(true);
     setError('');
     try {
-      // const response = await fetch('https://react-http-484a5-default-rtdb.firebaseio.com/movies.json');
-      const response = await fetch("https://swapi.dev/api/films/");
+      const url = `https://${process.env.REACT_APP_FIREBASE_KEY}.firebaseio.com/movies.json`;
+      const response = await fetch(url);
 
       if (!response.ok) {
         throw new Error('Something went wrong!');
