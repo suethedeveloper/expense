@@ -1,6 +1,6 @@
 export default interface RequestInfo {
     method?: string;
     headers?: {};
-    body?: string;
+    body?: string | {};
     url: string;
 }
