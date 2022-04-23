@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Tasks from './components/Tasks/Tasks';
 import NewTask from './components/NewTask/NewTask';
@@ -9,18 +9,18 @@ function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const url = `https://${process.env.REACT_APP_FIREBASE_KEY}.firebaseio.com/tasks.json`;
 
-  const transformTasks = useCallback((tasksObj) => {
-    const loadedTasks = [] as Task[];
-    for (const taskKey in tasksObj) {
-      loadedTasks.push({id: taskKey, text: tasksObj[taskKey].text})
-    }
-    setTasks(loadedTasks);
-  }, [])
-
-  const {isLoading, error, sendRequest: fetchTasks} = useHttp(transformTasks);
+  const {isLoading, error, sendRequest: fetchTasks} = useHttp();
 
   useEffect(() => {
-    fetchTasks({url});
+    const transformTasks = (tasksObj: any) => {
+      const loadedTasks = [] as Task[];
+      for (const taskKey in tasksObj) {
+        loadedTasks.push({id: taskKey, text: tasksObj[taskKey].text})
+      }
+      setTasks(loadedTasks);
+    };
+    
+    fetchTasks({url}, transformTasks);
   }, [fetchTasks]);
 
   const taskAddHandler = (task: Task) => {

@@ -1,11 +1,11 @@
 import { useCallback, useState } from "react";
 import RequestInfo from "../types/RequestInfo";
 
-const useHttp = (applyDataFn: (data: []) => void) => {
+const useHttp = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
 
-    const sendRequest = useCallback(async (requestConfig: RequestInfo) => {
+    const sendRequest = useCallback(async (requestConfig: RequestInfo, applyDataFn: (data: []) => void) => {
         setIsLoading(true);
         setError('');
         
@@ -30,7 +30,7 @@ const useHttp = (applyDataFn: (data: []) => void) => {
             }
         }
         setIsLoading(false);
-    },[applyDataFn]);
+    },[]);
 
     return {
         isLoading,

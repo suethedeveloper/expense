@@ -8,7 +8,8 @@ import Task from '../../types/Task';
 const Tasks = (props: {
   items: Task[];
   error: string;
-  onFetch: (args: any) => void;
+  // onFetch: (arg1: {}, arg2: ()=> void) => void;
+  onFetch: any;
   loading: boolean;
 }) => {
   let taskList = <h2>No tasks found. Start adding some!</h2>;
