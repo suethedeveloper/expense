@@ -1,43 +1,52 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import MoviesList from './components/MoviesList';
 import './App.css';
+import {MovieType} from "./types/MovieType";
 
 function App() {
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [movies, setMovies] = useState<MovieType[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
 
-  async function fetchMovieHandler() {
+  const fetchMovieHandler = useCallback(async () => {
     setIsLoading(true);
-    setError(null);
+    setError('');
     try {
+      // const response = await fetch('https://react-http-484a5-default-rtdb.firebaseio.com/movies.json');
       const response = await fetch("https://swapi.dev/api/films/");
+
       if (!response.ok) {
-        throw new Error("Something went wrong!");
+        throw new Error('Something went wrong!');
       }
-      
+
       const data = await response.json();
-  
-      const transformedMovies = data.results.map((movieData: {
-        episode_id: number;
-        title:string;
-        opening_crawl: string;
-        release_date: string;
-      }) => {
-        return {
-          id: movieData.episode_id,
-          title: movieData.title,
-          openingText: movieData.opening_crawl,
-          releaseDate: movieData.release_date       
-        }
-      })
-      setMovies(transformedMovies);
-      setIsLoading(false);
-    } catch(error: any) {
-      setError(error.message);
+
+      const loadedMovies: MovieType[] = [];
+
+      for (const key in data) {
+        loadedMovies.push({
+          id: key,
+          title: data[key].title,
+          openingText: data[key].openingText,
+          releaseDate: data[key].releaseDate,
+        });
+      }
+
+      setMovies(loadedMovies);
     }
-  }
+    catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      }
+    }
+    setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    fetchMovieHandler();
+  }, [fetchMovieHandler])
+
 
   let content = <p>Found no movies.</p>;
   if (movies.length > 0) {
