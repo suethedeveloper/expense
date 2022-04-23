@@ -1,13 +1,14 @@
+import { ReactNode } from 'react';
+
 import Section from '../UI/Section';
 import TaskItem from './TaskItem';
 import classes from './Tasks.module.css';
 import Task from '../../types/Task';
-import { ReactNode } from 'react';
 
 const Tasks = (props: {
   items: Task[];
   error: string;
-  onFetch: () => void;
+  onFetch: (args: any) => void;
   loading: boolean;
 }) => {
   let taskList = <h2>No tasks found. Start adding some!</h2>;
