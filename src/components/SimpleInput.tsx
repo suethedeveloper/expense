@@ -1,9 +1,16 @@
-import React, { FormEvent, useState, useRef } from "react";
+import React, { FormEvent, useState, useRef, useEffect } from "react";
 
 const SimpleInput = () => {
   const nameInputRef = useRef<HTMLInputElement | null>(null);
   const [enteredName, setEnteredName] = useState<string>("");
-  const [enteredNameValid, setEnteredNameValid] = useState<boolean>(true);
+  const [enteredNameIsValid, setenteredNameIsValid] = useState<boolean>(false);
+  const [enteredNameTouched, setEnteredNameTouched] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (enteredNameIsValid) {
+      console.log("Name Input is valid!");
+    }
+  },[enteredNameIsValid]);
   
   const nameInputChaneHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEnteredName(event.target.value);
@@ -12,12 +19,14 @@ const SimpleInput = () => {
   const formSubmissionHandler = (event: FormEvent) => {
     event.preventDefault();
 
+    setEnteredNameTouched(true);
+
     if (enteredName.trim() === "") {
-      setEnteredNameValid(false);
+      setenteredNameIsValid(false);
       return;
     }
 
-    setEnteredNameValid(true);
+    setenteredNameIsValid(true);
 
     const enteredValue = nameInputRef.current?.value;
     console.log("enteredName", enteredName);
@@ -27,16 +36,18 @@ const SimpleInput = () => {
     setEnteredName('');
   }
 
-  const nameInputClasses = enteredNameValid
-    ? 'form-control'
-    : 'form-control invalid';
+  const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
+
+  const nameInputClasses = nameInputIsInvalid
+    ? 'form-control invalid'
+    : 'form-control';
 
   return (
     <form onSubmit={formSubmissionHandler}>
       <div className={nameInputClasses}>
         <label htmlFor='name'>Your Name</label>
         <input ref={nameInputRef} type='text' id='name' onChange={nameInputChaneHandler} />
-        {!enteredNameValid && <p className="error-text">Name must not be empty.</p>}
+        {nameInputIsInvalid && <p className="error-text">Name must not be empty.</p>}
       </div>
       <div className="form-actions">
         <button>Submit</button>
