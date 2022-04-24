@@ -11,6 +11,15 @@ const SimpleInput = () => {
       console.log("Name Input is valid!");
     }
   },[enteredNameIsValid]);
+
+  const nameInputBlurHandler = () => {
+    setEnteredNameTouched(true);
+
+    if (enteredName.trim() === "") {
+      setenteredNameIsValid(false);
+      return;
+    }
+  }
   
   const nameInputChaneHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEnteredName(event.target.value);
@@ -46,7 +55,12 @@ const SimpleInput = () => {
     <form onSubmit={formSubmissionHandler}>
       <div className={nameInputClasses}>
         <label htmlFor='name'>Your Name</label>
-        <input ref={nameInputRef} type='text' id='name' onChange={nameInputChaneHandler} />
+        <input
+          ref={nameInputRef}
+          type='text' id='name'
+          onBlur={nameInputBlurHandler}
+          onChange={nameInputChaneHandler}
+        />
         {nameInputIsInvalid && <p className="error-text">Name must not be empty.</p>}
       </div>
       <div className="form-actions">
