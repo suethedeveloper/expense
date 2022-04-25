@@ -1,28 +1,19 @@
-import React, { FormEvent, useState, useRef, useEffect } from "react";
+import React, { FormEvent, useState } from "react";
 
 const SimpleInput = () => {
-  const nameInputRef = useRef<HTMLInputElement | null>(null);
   const [enteredName, setEnteredName] = useState<string>("");
-  const [enteredNameIsValid, setenteredNameIsValid] = useState<boolean>(false);
   const [enteredNameTouched, setEnteredNameTouched] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (enteredNameIsValid) {
-      console.log("Name Input is valid!");
-    }
-  },[enteredNameIsValid]);
+  const enteredNameIsValid = enteredName.trim() !== "";
+  const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
+  console.log("nameInputIsInvalid", nameInputIsInvalid)
+
+  const nameInputChaneHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEnteredName(event.target.value);
+  }
 
   const nameInputBlurHandler = () => {
     setEnteredNameTouched(true);
-
-    if (enteredName.trim() === "") {
-      setenteredNameIsValid(false);
-      return;
-    }
-  }
-  
-  const nameInputChaneHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEnteredName(event.target.value);
   }
 
   const formSubmissionHandler = (event: FormEvent) => {
@@ -30,22 +21,13 @@ const SimpleInput = () => {
 
     setEnteredNameTouched(true);
 
-    if (enteredName.trim() === "") {
-      setenteredNameIsValid(false);
+    if (!enteredNameIsValid) {
       return;
     }
 
-    setenteredNameIsValid(true);
-
-    const enteredValue = nameInputRef.current?.value;
-    console.log("enteredName", enteredName);
-    console.log("enteredValue", enteredValue);
-    //using state vs ref on validation
-    // nameInputRef.current.value = ""; ==> NOT IDEAL. DON'T MANIPULATE THE DOM
     setEnteredName('');
+    setEnteredNameTouched(false);
   }
-
-  const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
 
   const nameInputClasses = nameInputIsInvalid
     ? 'form-control invalid'
@@ -56,10 +38,10 @@ const SimpleInput = () => {
       <div className={nameInputClasses}>
         <label htmlFor='name'>Your Name</label>
         <input
-          ref={nameInputRef}
           type='text' id='name'
           onBlur={nameInputBlurHandler}
           onChange={nameInputChaneHandler}
+          value={enteredName}
         />
         {nameInputIsInvalid && <p className="error-text">Name must not be empty.</p>}
       </div>
