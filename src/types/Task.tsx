@@ -1,4 +1,4 @@
 export default interface Task {
-    id: string | number;
+    id?: string | number;
     text: string;
   }

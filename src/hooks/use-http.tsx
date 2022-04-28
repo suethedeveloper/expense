@@ -5,7 +5,12 @@ const useHttp = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
 
-    const sendRequest = useCallback(async (requestConfig: RequestInfo, applyDataFn: (data: []) => void) => {
+    const sendRequest = useCallback(async (
+        requestConfig: RequestInfo,
+        applyDataFn: (tasksObj: {
+            [key: string | number]: { text: string };
+        }) => void
+    ) => {
         setIsLoading(true);
         setError('');
         

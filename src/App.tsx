@@ -12,15 +12,17 @@ function App() {
   const {isLoading, error, sendRequest: fetchTasks} = useHttp();
 
   useEffect(() => {
-    const transformTasks = (tasksObj: any) => {
+    const transformTasks = (tasksObj: {
+      [key: string | number]: { text: string };
+    }) => {
       const loadedTasks = [] as Task[];
       for (const taskKey in tasksObj) {
-        loadedTasks.push({id: taskKey, text: tasksObj[taskKey].text})
+        loadedTasks.push({ id: taskKey, text: tasksObj[taskKey].text });
       }
       setTasks(loadedTasks);
     };
-    
-    fetchTasks({url}, transformTasks);
+
+    fetchTasks({ url }, transformTasks);
   }, [fetchTasks]);
 
   const taskAddHandler = (task: Task) => {

@@ -3,14 +3,14 @@ import TaskForm from './TaskForm';
 import Task from '../../types/Task';
 import useHttp from '../../hooks/use-http';
 
-const NewTask = (props: {onAddTask: (task: Task) => void}) => {
+const NewTask = ({onAddTask}: {onAddTask: (task: Task) => void}) => {
   const {isLoading, error, sendRequest: sendTaskRequest} = useHttp();
   
-  const createTask = (taskText: string, taskData: any) => {
+  const createTask = (taskText: string, taskData: {name?: string}) => {
     const generatedId = taskData.name; // firebase-specific => "name" contains generated id
     const createdTask: Task = { id: generatedId, text: taskText };
 
-    props.onAddTask(createdTask);
+    onAddTask(createdTask);
   }
 
   const enterTaskHandler = async (taskText: string) => {
