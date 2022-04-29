@@ -10,7 +10,7 @@ const SimpleInput = () => {
     inputBlurHandler: nameBlurHandler,
     reset: resetNameInput,
   } = useInput((value) => value.trim() !== '');
-
+  
   const {
     value: enteredEmail,
     isValid: enteredEmailIsValid,
