@@ -4,9 +4,15 @@ import MealItem from "./MealItem/MealItem";
 import { useEffect, useState } from "react";
 import MealType from "../../types/MealType";
 
+// interface Error {
+//   status: 'error';
+//   error: Error;
+// }
+
 const AvailableMeals  = () => {
   const [meals, setMeals] = useState<MealType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [httpError, setHttpError] = useState<Error | string>('');
   /* 
     should not return a promise. only syncronized function.
     DO NOT USE THIS WAY: useEffect(async() => { await fetch().then() },[])
@@ -17,6 +23,10 @@ const AvailableMeals  = () => {
 
     const fetchMeals = async() => {
       const response = await fetch(URL, {});
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
       const responseData = await response.json();
       const loadedMals = [];
       for (const key in responseData) {
@@ -31,10 +41,16 @@ const AvailableMeals  = () => {
       setIsLoading(false);
     }
 
+    try {
     // setTimeout(() => 
-      fetchMeals()
+    fetchMeals()
     // , 2000) //if want to see the loading text
-    ;
+    } catch (err) {
+      if (err instanceof Error) {
+        setIsLoading(false);
+        setHttpError(err.message);
+      }
+    }
   },[]);
 
   if (isLoading) {
@@ -43,6 +59,14 @@ const AvailableMeals  = () => {
         <p>Loading...</p>
       </section>
     )
+  }
+
+  if (httpError) {
+    return (
+      <section className={classes.MealsError}>
+        <p>{httpError}</p>
+      </section>
+    )   
   }
   
   const mealsList = meals.map((meal: any) => (
