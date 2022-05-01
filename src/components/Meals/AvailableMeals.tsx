@@ -6,6 +6,7 @@ import MealType from "../../types/MealType";
 
 const AvailableMeals  = () => {
   const [meals, setMeals] = useState<MealType[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   /* 
     should not return a promise. only syncronized function.
     DO NOT USE THIS WAY: useEffect(async() => { await fetch().then() },[])
@@ -27,10 +28,22 @@ const AvailableMeals  = () => {
         })
       }
       setMeals(loadedMals);
+      setIsLoading(false);
     }
 
-    fetchMeals();
+    // setTimeout(() => 
+      fetchMeals()
+    // , 2000) //if want to see the loading text
+    ;
   },[]);
+
+  if (isLoading) {
+    return (
+      <section className={classes.MealsLoading}>
+        <p>Loading...</p>
+      </section>
+    )
+  }
   
   const mealsList = meals.map((meal: any) => (
     <MealItem 
