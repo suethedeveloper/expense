@@ -41,16 +41,14 @@ const AvailableMeals  = () => {
       setIsLoading(false);
     }
 
-    try {
-    // setTimeout(() => 
-    fetchMeals()
-    // , 2000) //if want to see the loading text
-    } catch (err) {
-      if (err instanceof Error) {
-        setIsLoading(false);
-        setHttpError(err.message);
-      }
-    }
+    // fetchMeals() returns promise. so doens't work with try catch. the promise will return reject
+    // so refactor like below
+      fetchMeals().catch( err => {
+        if (err instanceof Error) {
+          setIsLoading(false);
+          setHttpError(err.message);
+        }
+      });
   },[]);
 
   if (isLoading) {
