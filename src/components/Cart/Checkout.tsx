@@ -1,21 +1,16 @@
 import { useRef, useState } from "react";
 import classes from "./Checkout.module.css";
+import USerDataType from "../../types/UserDataType";
 
-interface UserState {
-    name: boolean;
-    street: boolean;
-    city: boolean;
-    postalCode: boolean;
-}
 
 const isEmpty = (value: string) => value.trim() === "";
 const isFiveChar = (value: string) => value.trim().length === 5;
 
 const Checkout  = (
-    {onCancel}: {onCancel: () => void}
+    {onCancel, onConfirm}: {onCancel: () => void; onConfirm: (data:USerDataType) => void;}
     ) => {
     
-    const [formInputValidity, setFormInputValidity] = useState<UserState>({
+    const [formInputValidity, setFormInputValidity] = useState<USerDataType>({
         name: true,
         street: true,
         city: true,
@@ -56,6 +51,13 @@ const Checkout  = (
         if (!formIsValid) {
             return ;
         }
+
+        onConfirm({
+            name: enteredName,
+            street: enteredStreet,
+            city: enteredCity,
+            postalCode: enteredPostal          
+        });
     }
 
     const nameControlClasses = `${classes.control} ${
@@ -70,7 +72,6 @@ const Checkout  = (
     const cityControlClasses = `${classes.control} ${
         formInputValidity.city ? '' : classes.invalid
     }`
-    console.log("==PPP", postalCodeControlClasses)
 
     return (
         <form className={classes.form} onSubmit={confirmHandler}>

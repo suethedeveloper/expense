@@ -4,6 +4,7 @@ import classes from "./Cart.module.css";
 import CartContext, { Item } from "../../store/cart-context";
 import CartItem from "./CartItem";
 import Checkout from "./Checkout";
+import USerDataType from "../../types/UserDataType";
 
 const Cart = ({onClose}: {onClose: () => void}) => {
     const [isCheckout, setCheckout] = useState<boolean>(false);
@@ -19,7 +20,18 @@ const Cart = ({onClose}: {onClose: () => void}) => {
 
     const orderHandler = () => {
         setCheckout(true);
-    }
+    };
+
+    const submitOrderHandler = (userData: USerDataType) => {
+        const URL = `https://${process.env.REACT_APP_FIREBASE_KEY}.firebaseio.com/orders.json`;
+        fetch(URL, {
+            method: "POST",
+            body: JSON.stringify({
+                user: userData,
+                orderedItems: cartCtx.items
+            })
+        });
+    };
 
     const cartItems = (
         <ul className={classes['cart-items']}>
@@ -52,7 +64,7 @@ const Cart = ({onClose}: {onClose: () => void}) => {
                 <span>{totalAmount}</span>
             </div>
             {isCheckout 
-                ? <Checkout onCancel={onClose} /> 
+                ? <Checkout onConfirm={submitOrderHandler} onCancel={onClose} /> 
                 : modalActions}
         </Modal>
     )
