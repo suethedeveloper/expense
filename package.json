@@ -1,0 +1,23 @@
+{
+  "name": "expense",
+  "version": "1.0.0",
+  "description": "",
+  "main": "redux-demo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suethedeveloper/expense.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/suethedeveloper/expense/issues"
+  },
+  "homepage": "https://github.com/suethedeveloper/expense#readme",
+  "dependencies": {
+    "redux": "^4.2.0"
+  }
+}
