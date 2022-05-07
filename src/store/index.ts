@@ -1,8 +1,7 @@
 
 import { legacy_createStore } from "redux";
-// redux.createStore();
 
-const counterReducer = (state = {counter: 0}, action) => {
+const counterReducer = (state = {counter: 0}, action: {type: string}) => {
     if (action.type === "increment") {
         return {
             counter: state.counter + 1
