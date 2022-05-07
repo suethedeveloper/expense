@@ -9,7 +9,6 @@
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.21",
     "@types/react": "^17.0.39",
-    "dotenv": "^16.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-redux": "^8.0.1",
@@ -23,27 +22,27 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-    },
-    "eslintConfig": {
+  },
+  "eslintConfig": {
     "extends": [
-    "react-app",
-    "react-app/jest"
+      "react-app",
+      "react-app/jest"
     ]
-    },
-    "browserslist": {
+  },
+  "browserslist": {
     "production": [
-    ">0.2%",
-    "not dead",
-    "not op_mini all"
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
     ],
     "development": [
-    "last 1 chrome version",
-    "last 1 firefox version",
-    "last 1 safari version"
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
     ]
-    },
-    "devDependencies": {
+  },
+  "devDependencies": {
     "@types/moment": "^2.13.0",
     "@types/react-dom": "^18.0.2"
-    }
   }
+}
