@@ -1,5 +1,5 @@
 
-import { createStore } from "redux";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface State {
     counter:number;
@@ -14,6 +14,25 @@ interface Action {
 
 const initialState = {counter: 0, showCounter: true};
 const initialAction = {type: "increment", amount: 0};
+createSlice({
+    name: 'counter',
+    initialState,
+    reducers: {
+        increment(state) {
+            state.counter++;
+        },
+        descrement(state) {
+            state.counter--;
+        },
+        increase(state: {counter: number}, action: any) {
+        // increase(state: {counter: number}, action: {type: string, amount: number}) {
+            state.counter = state.counter + action.amount;
+        },
+        toggleCounter(state) {
+            state.showCounter = !state.showCounter;
+        }
+    }
+})
 
 //not working...  action: {type: string, amount?: null | number | undefined
 const counterReducer =
