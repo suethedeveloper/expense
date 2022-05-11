@@ -10,12 +10,15 @@ interface Action {
     amount: number;
 }
 
+// export const INCREMENT = "increment";
+
 const initialState = {counter: 0, showCounter: true};
 const initialAction = {type: "increment", amount: 0};
 
 //not working...  action: {type: string, amount?: null | number | undefined
 const counterReducer =
 (state: State = initialState, action: Action = initialAction) => {
+    // if (action.type === INCREMENT) {
     if (action.type === "increment") {
         return {
             counter: state.counter + 1,
