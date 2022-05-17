@@ -1,14 +1,32 @@
-import classes from './CartItem.module.css';
+import classes from "./CartItem.module.css";
+import { useAppDispatch } from "../../app/hooks";
+import { cartActions } from "../../store/cart-slice";
+import { Item } from "../../store/cart-slice";
 
-const CartItem = (props: any) => {
-  const { title, quantity, total, price } = props.item;
+const CartItem = (props: { item: Item }) => {
+  const { id, title, quantity, totalPrice, price } = props.item;
+  const dispatch = useAppDispatch();
+
+  const removeItemHandler = () => {
+    dispatch(cartActions.removeItemFromCart(id));
+  };
+
+  const addItemHandler = () => {
+    dispatch(
+      cartActions.addItemToCart({
+        id,
+        title,
+        price,
+      })
+    );
+  };
 
   return (
     <li className={classes.item}>
       <header>
         <h3>{title}</h3>
         <div className={classes.price}>
-          ${total.toFixed(2)}{' '}
+          ${totalPrice.toFixed(2)}{" "}
           <span className={classes.itemprice}>(${price.toFixed(2)}/item)</span>
         </div>
       </header>
@@ -17,8 +35,8 @@ const CartItem = (props: any) => {
           x <span>{quantity}</span>
         </div>
         <div className={classes.actions}>
-          <button>-</button>
-          <button>+</button>
+          <button onClick={removeItemHandler}>-</button>
+          <button onClick={addItemHandler}>+</button>
         </div>
       </div>
     </li>

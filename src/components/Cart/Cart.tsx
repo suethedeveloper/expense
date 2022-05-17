@@ -1,15 +1,27 @@
-import Card from '../UI/Card';
-import classes from './Cart.module.css';
-import CartItem from './CartItem';
+import Card from "../UI/Card";
+import classes from "./Cart.module.css";
+import CartItem from "./CartItem";
+import { useAppSelector } from "../../app/hooks";
 
-const Cart = (props: any) => {
+const Cart = () => {
+  const cartItems = useAppSelector((state) => state.cart.items);
+
   return (
     <Card className={classes.cart}>
       <h2>Your Shopping Cart</h2>
       <ul>
-        <CartItem
-          item={{ title: 'Test Item', quantity: 3, total: 18, price: 6 }}
-        />
+        {cartItems.map((item) => (
+          <CartItem
+            key={item.id}
+            item={{
+              id: item.id,
+              title: item.title,
+              quantity: item.quantity,
+              totalPrice: item.totalPrice,
+              price: item.price,
+            }}
+          />
+        ))}
       </ul>
     </Card>
   );

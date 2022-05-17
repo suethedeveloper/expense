@@ -1,8 +1,20 @@
-import Card from '../UI/Card';
-import classes from './ProductItem.module.css';
+import Card from "../UI/Card";
+import classes from "./ProductItem.module.css";
+import { useAppDispatch } from "../../app/hooks";
+import { cartActions } from "../../store/cart-slice";
 
-const ProductItem = (props: any) => {
-  const { title, price, description } = props;
+const ProductItem = (props: {
+  id: string;
+  title: string;
+  price: number;
+  description: string;
+}) => {
+  const { id, title, price, description } = props;
+  const dispatch = useAppDispatch();
+  const payload = { id: id, title: title, price: price };
+  const addToCartHandler = () => {
+    dispatch(cartActions.addItemToCart(payload));
+  };
 
   return (
     <li className={classes.item}>
@@ -13,7 +25,7 @@ const ProductItem = (props: any) => {
         </header>
         <p>{description}</p>
         <div className={classes.actions}>
-          <button>Add to Cart</button>
+          <button onClick={addToCartHandler}>Add to Cart</button>
         </div>
       </Card>
     </li>
