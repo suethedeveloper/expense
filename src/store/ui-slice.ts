@@ -1,4 +1,3 @@
-   
 import { createSlice } from "@reduxjs/toolkit";
 import NotificationType from "../app/Notification";
 
@@ -13,7 +12,6 @@ const uiSlice = createSlice({
   initialState,
   reducers: {
     toggle(state) {
-      console.log(state.cartIsvisible);
       state.cartIsvisible = !state.cartIsvisible;
     },
     showNotification(state, action) {

@@ -1,7 +1,8 @@
    
 import classes from './Notification.module.css';
+import NotificationType from '../../app/Notification';
 
-const Notification = (props: any) => {
+const Notification = (props: NotificationType) => {
   let specialClasses = '';
 
   if (props.status === 'error') {
