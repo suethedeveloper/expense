@@ -29,6 +29,10 @@ function App() {
       return;
     }
 
+    if (cart.changed) {
+      dispatch(sendCartData(cart));
+    }
+
     dispatch(sendCartData(cart));
   }, [cart, dispatch]); //dispatch will never trigger this useffect since redux knows it's a function?? need to double check!
 
