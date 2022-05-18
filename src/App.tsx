@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import NotificationType from "./app/Notification";
 
-import {sendCartData} from "./store/cart-slice";
+import {fetchCartData, sendCartData} from "./store/cart-actions";
 
 import Cart from "./components/Cart/Cart";
 import Layout from "./components/Layout/Layout";
@@ -20,10 +20,15 @@ function App() {
   const notification = useSelector((state: {ui: {notification: NotificationType}}) => state.ui.notification);
 
   useEffect(() => {
+    dispatch(fetchCartData());
+  }, [dispatch])
+
+  useEffect(() => {
     if (isInitial) {
       isInitial = false;
       return;
     }
+
     dispatch(sendCartData(cart));
   }, [cart, dispatch]); //dispatch will never trigger this useffect since redux knows it's a function?? need to double check!
 

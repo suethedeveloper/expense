@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice,  PayloadAction} from "@reduxjs/toolkit";
 import NotificationType from "../app/Notification";
 
 type InitialUiState = {
@@ -14,7 +14,7 @@ const uiSlice = createSlice({
     toggle(state) {
       state.cartIsvisible = !state.cartIsvisible;
     },
-    showNotification(state, action) {
+    showNotification(state, action: PayloadAction<NotificationType>) {
       state.notification = {
         status: action.payload.status,
         title: action.payload.title,
