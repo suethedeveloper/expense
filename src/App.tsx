@@ -1,52 +1,33 @@
-import { useState } from "react";
-import NewExpense from "./components/NewExpense/NewExpense";
-import Expenses from './components/Expenses/Expenses';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
-// export interface Expense {
-//   id: string; 
-//   title: string; 
-//   amount: number; 
-//   date: Date;
-// }
-import { ExpenseType } from "./interface";
-
-const DUMMY_EXPENSES: ExpenseType[]  = [
-  {
-    id: 'e1',
-    title: "Toilet Papaer",
-    amount: 94.12,
-    date: new Date(2020, 7, 4)
-  },
-  {
-    id: 'e2',
-    title: "new TV",
-    amount: 799.49,
-    date: new Date(2021, 2, 12)
-  },
-  {
-    id: 'e3',
-    title: "Car Insurance",
-    amount: 294.67,
-    date: new Date(2021, 2, 28)
-  }
-];
+import AllQuotes from './pages/AllQuotes';
+import QuoteDetail from './pages/QuoteDetail';
+import NewQuote from './pages/NewQuote';
+import NotFound from './pages/NotFound';
+import Layout from './components/layout/Layout';
 
 function App() {
-  // let expenses = 
-  const [expenses, setExpenses] = useState<ExpenseType[]>(DUMMY_EXPENSES);
-
-  const addExpenseHandler = (expense: ExpenseType) => {
-    setExpenses((prevExpenses) => {
-      return [expense, ...prevExpenses]
-    });
-  }
-
   return (
-    <div>
-      <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
-      <Expenses items={expenses} />
-    </div>
-  ); 
+    <Layout>
+      <Switch>
+        <Route path='/' exact>
+          <Redirect to='/quotes' />
+        </Route>
+        <Route path='/quotes' exact>
+          <AllQuotes />
+        </Route>
+        <Route path='/quotes/:quoteId'>
+          <QuoteDetail />
+        </Route>
+        <Route path='/new-quote'>
+          <NewQuote />
+        </Route>
+        <Route path='*'>
+          <NotFound />
+        </Route>
+      </Switch>
+    </Layout>
+  );
 }
 
 export default App;
