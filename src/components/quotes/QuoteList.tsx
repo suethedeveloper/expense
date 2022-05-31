@@ -1,12 +1,12 @@
 import { Fragment } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
-import Quote from "./types";
+import Quote from '../../types/Quote';
 
 import QuoteItem from './QuoteItem';
 import classes from './QuoteList.module.css';
 
-const sortQuotes = ({quotes}:{quotes: Quote[]}, ascending: boolean) => {
+const sortQuotes = (quotes: Quote[], ascending: boolean) => {
   return quotes.sort((quoteA: Quote, quoteB: Quote) => {
     if (ascending) {
       return quoteA.id > quoteB.id ? 1 : -1;
@@ -16,7 +16,7 @@ const sortQuotes = ({quotes}:{quotes: Quote[]}, ascending: boolean) => {
   })
 }
 
-const QuoteList = ({quotes}:{quotes: any}) => {
+const QuoteList = (quotes: any) => {
   // {quotes}:{quotes:Quote[]}
   const history = useHistory<string []>();
   const location = useLocation<string>();
