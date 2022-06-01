@@ -7,7 +7,8 @@ import QuoteItem from './QuoteItem';
 import classes from './QuoteList.module.css';
 
 const sortQuotes = (quotes: Quote[], ascending: boolean) => {
-  return quotes.sort((quoteA: Quote, quoteB: Quote) => {
+  // return quotes.sort((quoteA: Quote, quoteB: Quote) => {
+    return quotes.sort((quoteA: any, quoteB: any) => {
     if (ascending) {
       return quoteA.id > quoteB.id ? 1 : -1;
     } else {
@@ -16,7 +17,8 @@ const sortQuotes = (quotes: Quote[], ascending: boolean) => {
   })
 }
 
-const QuoteList = (quotes: any) => {
+const QuoteList = ({quotes}:{quotes: Quote[]}) => {
+  console.log("quotes", quotes)
   // {quotes}:{quotes:Quote[]}
   const history = useHistory<string []>();
   const location = useLocation<string>();

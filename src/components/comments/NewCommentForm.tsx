@@ -1,11 +1,11 @@
-import { useRef } from 'react';
+import { FormEvent, useRef } from 'react';
 
 import classes from './NewCommentForm.module.css';
 
 const NewCommentForm = () => {
-  const commentTextRef = useRef<any>();
+  const commentTextRef = useRef<HTMLTextAreaElement>(null);
 
-  const submitFormHandler = (event: any) => {
+  const submitFormHandler = (event: FormEvent) => {
     event.preventDefault();
 
     // optional: Could validate here

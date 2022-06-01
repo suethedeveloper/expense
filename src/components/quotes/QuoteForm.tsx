@@ -5,8 +5,8 @@ import LoadingSpinner from '../UI/LoadingSpinner';
 import classes from './QuoteForm.module.css';
 
 const QuoteForm = (props: any) => {
-  const authorInputRef = useRef<any>();
-  const textInputRef = useRef<any>();
+  const authorInputRef = useRef<HTMLInputElement>(null);
+  const textInputRef = useRef<HTMLTextAreaElement>(null);
 
   function submitFormHandler(event: any) {
     event.preventDefault();

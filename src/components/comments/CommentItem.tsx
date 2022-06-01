@@ -1,9 +1,9 @@
 import classes from './CommentItem.module.css';
 
-const CommentItem = (props: any) => {
+const CommentItem = ({text}:{text: string}) => {
   return (
     <li className={classes.item}>
-      <p>{props.text}</p>
+      <p>{text}</p>
     </li>
   );
 };
