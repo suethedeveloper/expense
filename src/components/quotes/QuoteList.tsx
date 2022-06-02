@@ -18,8 +18,6 @@ const sortQuotes = (quotes: Quote[], ascending: boolean) => {
 }
 
 const QuoteList = ({quotes}:{quotes: Quote[]}) => {
-  console.log("quotes", quotes)
-  // {quotes}:{quotes:Quote[]}
   const history = useHistory<string []>();
   const location = useLocation<string>();
 

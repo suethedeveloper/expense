@@ -41,6 +41,7 @@ import { useReducer, useCallback } from 'react';
     async function (requestData) {
       dispatch({ type: 'SEND' });
       try {
+        // const responseData = await requestFunction(text, id);
         const responseData = await requestFunction(requestData);
         dispatch({ type: 'SUCCESS', responseData });
       } catch (error) {
