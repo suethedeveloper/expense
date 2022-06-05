@@ -22,44 +22,50 @@ const AuthForm = () => {
     //Add validation if wanted
 
     setIsLoading(true);
+    let URL;
+    const key = process.env.REACT_APP_FIREBASE_WEB_API_KEY as string;
     if (isLogin) {
-
+      URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${key}`;
     } else {
-      const key = process.env.REACT_APP_FIREBASE_WEB_API_KEY as string;
-      const URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${key}`;
+      URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${key}`;
       /** body data payload is from
        * https://firebase.google.com/docs/reference/rest/auth#section-create-email-password
        */
-
-      //SignUp Request
-      fetch(
-        URL,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email: enteredEmail,
-            password: enteredPassword,
-            returnSecureToken: true
-          }),
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }).then((res: any) => {
-          setIsLoading(false);
-          if (res.ok) {
-            //...
-          } else {
-            return res.json().then((data: any) => {
-              let errorMessage = "Authentication failed!";
-              if (data?.error?.message) {
-                errorMessage = data.error.message;
-              }
-              // we could show an error modal
-              alert(errorMessage);
-            })
-          }
-        });
     }
+
+    //SignUp Request
+    fetch(
+      URL,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: enteredEmail,
+          password: enteredPassword,
+          returnSecureToken: true
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then((res: any) => {
+        setIsLoading(false);
+        if (res.ok) {
+          return res.json();
+        } else {
+          return res.json().then((data: any) => {
+            let errorMessage = "Authentication failed!";
+            if (data?.error?.message) {
+              errorMessage = data.error.message;
+            }
+            // we could show an error modal
+            throw new Error(errorMessage);
+          });
+        }
+      }).then(data => {
+        console.log(data);
+      }).catch (error => {
+        alert(error.message);
+      }
+    );
   }
 
   return (
